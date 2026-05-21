@@ -91,5 +91,19 @@ darkBtn.onclick=()=>{
 document.body.classList.toggle('dark');
 darkBtn.innerText=document.body.classList.contains('dark')?'☀️ Light':'🌙 Dark';
 }
+function aiSuggest(taskText){
+let text=taskText.toLowerCase();
 
+if(text.includes('đồ án') || text.includes('deadline') || text.includes('nộp')){
+return '🤖 AI: Công việc ưu tiên CAO';
+}
+
+if(text.includes('học') || text.includes('react') || text.includes('seo')){
+return '🤖 AI: Nên làm trong hôm nay';
+}
+
+return '🤖 AI: Mức ưu tiên bình thường';
+}
+document.getElementById('aiSuggest').innerText=
+aiSuggest(text) 
 renderTasks();
