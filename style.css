@@ -20,3 +20,14 @@ input{padding:10px;border:1px solid #ccc;border-radius:10px;width:100%}
 .progress{height:20px;background:#ddd;border-radius:20px;overflow:hidden}
 .bar{height:100%;width:0;background:green;transition:.5s}
 small{display:block}
+.ai-box{
+margin:10px 0;
+padding:12px;
+border-radius:10px;
+background:#eef4ff;
+font-weight:bold;
+}
+
+.dark .ai-box{
+background:#3d4b6a;
+}

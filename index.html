@@ -19,24 +19,30 @@
 <button class="addBtn" onclick="addTask()">Thêm</button>
 </div>
 
-<input class="search" id="search" placeholder="🔎 Tìm kiếm..." onkeyup="renderTasks()">
-    <div id="aiSuggest" style="margin-bottom:15px;font-weight:bold"></div>
+    <input 
+        class="search" 
+        id="search" 
+        placeholder="🔎 Tìm kiếm..." 
+        onkeyup="renderTasks()">
 
-<div class="filters">
-<button onclick="setFilter('all')">Tất cả</button>
-<button onclick="setFilter('active')">Chưa xong</button>
-<button onclick="setFilter('done')">Hoàn thành</button>
-</div>
+    <div id="aiSuggest" class="ai-box">
+            🤖 AI đang chờ gợi ý...
+        </div>
+    <div class="filters">
+            <button onclick="setFilter('all')">Tất cả</button>
+            <button onclick="setFilter('active')">Chưa xong</button>
+            <button onclick="setFilter('done')">Hoàn thành</button>
+        </div>
 
-<div id="taskList"></div>
+    <div id="taskList"></div>
 
-<div class="progressBox">
-<p id="status"></p>
-<div class="progress">
-<div class="bar" id="bar"></div>
-</div>
-</div>
-</div>
-<script src="script.js"></script>
-</body>
+        <div class="progressBox">
+        <p id="status"></p>
+        <div class="progress">
+        <div class="bar" id="bar"></div>
+    </div>
+    </div>
+    </div>
+    <script src="script.js"></script>
+    </body>
 </html>
