@@ -3,40 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Task Manager</title>
+<title>To DO</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-<div class="top">
-<h1>📋 Smart Task Manager</h1>
-<button id="darkBtn">🌙 Dark</button>
-</div>
-
-<div class="form">
-<input id="taskInput" placeholder="Nhập công việc...">
-<input type="date" id="deadline">
-<button class="addBtn" onclick="addTask()">Thêm</button>
-</div>
-
-    <input 
-        class="search" 
-        id="search" 
-        placeholder="🔎 Tìm kiếm..." 
-        onkeyup="renderTasks()">
-
-    <div id="aiSuggest" class="ai-box">
-            🤖 AI đang chờ gợi ý...
-        </div>
-    <div class="filters">
-            <button onclick="setFilter('all')">Tất cả</button>
-            <button onclick="setFilter('active')">Chưa xong</button>
-            <button onclick="setFilter('done')">Hoàn thành</button>
-        </div>
-
-    <div id="taskList"></div>
-
-        <div class="progressBox">
+    <h1> Đăng Nhập </h1>
+    <form method="post" action="xulydangnhap.php" class="tencuasanpham">
+        <label>Email</label>
+        <input type="email" id="email-input" />
+        <br/>
+        
+        <label>Mật khẩu</label>
+        <input type="password" id="password-input" />
+        <br />
+        <button 
+                type="submit" 
+                id="login-button" 
+                data-testid="login-submit">
+                Đăng nhập
+            </button>
+    </form>
         <p id="status"></p>
         <div class="progress">
         <div class="bar" id="bar"></div>
@@ -44,5 +30,26 @@
     </div>
     </div>
     <script src="script.js"></script>
+    <script>
+        //tìm phần tử có id "from-login"
+        const loginForm = document.getElementById("form-login");
+        //đăng ký sự kiện sumit
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault();// chặn from gọi dữ liệu
+// thu thập thông tin các ô nhập liệu 
+            var email =
+                document.getElementById("email-input").value;
+
+            var password =
+                document.getElementById("password-input").value;
+//gọi hàm xử lý 
+            var thongbao = Login(email, password);
+
+            alert(thongbao);
+        });
+
+        console.log(loginForm);
+
+    </script>
     </body>
 </html>

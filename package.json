@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@vitest/coverage-v8": "^4.1.7",
+    "http-server": "^14.1.1",
+    "vitest": "^4.1.7"
+  }
+}
