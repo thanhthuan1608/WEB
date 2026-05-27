@@ -1,8 +1,34 @@
-{
-  "devDependencies": {
-    "@playwright/test": "^1.60.0",
-    "@vitest/coverage-v8": "^4.1.7",
-    "http-server": "^14.1.1",
-    "vitest": "^4.1.7"
+  {
+    "name": "todo-web",
+    "version": "1.0.0",
+    "description": "Du an web HTML CSS JS demo hoc Test AI & CI/CD",
+    "keywords": [
+      "web",
+      "demo",
+      "ai",
+      "ci",
+      "cd"
+    ],
+    "homepage": "https://github.com/kellyfire611/todo-web#readme",
+    "bugs": {
+      "url": "https://github.com/kellyfire611/todo-web/issues"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/kellyfire611/todo-web.git"
+    },
+    "license": "MIT",
+    "author": "kellyfire611",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+      "test:unit": "vitest run tests/unit",
+      "test:e2e": "playwright test --ui"
+    },
+    "devDependencies": {
+      "@playwright/test": "^1.60.0",
+      "@vitest/coverage-v8": "^4.1.7",
+      "http-server": "^14.1.1",
+      "vitest": "^4.1.7"
+    }
   }
-}
