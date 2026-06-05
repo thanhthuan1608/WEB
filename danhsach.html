@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Người Dùng</title>
+</head>
+<body>
+
+    <h1>Danh Sách Người Dùng</h1>
+
+    <form id="frmUsers">
+        <label>Địa chỉ API URL:</label>
+        <input
+            type="text"
+            id="api-url"
+            value="https://jsonplaceholder.typicode.com/users"
+        />
+        <button type="submit">Lấy Dữ Liệu</button>
+    </form>
+
+    <hr>
+
+    <div id="result"></div>
+
+    <script type="module">
+    import { displayUsers } from "./src/userStore.js";
+
+    const frmUsers = document.getElementById("frmUsers");
+
+    frmUsers.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        const apiUrl =
+            document.getElementById("api-url").value;
+
+        const resultDiv =
+            document.getElementById("result");
+
+        try {
+
+            await displayUsers(
+                apiUrl,
+                resultDiv
+            );
+
+        } catch (error) {
+
+            resultDiv.innerHTML =
+                `<p style="color:red">
+                    Lỗi: ${error.message}
+                </p>`;
+        }
+    });
+</script>
+    <script type="module" src="./src/userStore.js"></script>
+
+</body>
+</html>

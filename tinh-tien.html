@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính tiền</title>
+    <script type="module" src="src/discountStore.js"></script>
+</head>
+<body>
+    <h1>Tính tiền sau giảm giá</h1>
+    <form>
+        <label>Giá gốc (VNĐ)</label>
+        <input type="number" id="numSoTien" /><br />
+
+        <label>Giảm giá (%)</label>
+        <input type="number" id="numPhanTram" /><br />
+
+        <button type="button" id="btnTinhTien">Tính tiền</button>
+        <div id="ketqua"></div>
+    </form>
+    <script>
+        const btnTinhTien = document.getElementById('btnTinhTien');
+        btnTinhTien.addEventListener('click', (event) => {
+            // 1. thu thập thông tin từ giao diện (người dùng)
+            var sotien = document.getElementById('numSoTien').value;
+            var phantram = document.getElementById('numPhanTram').value;
+            // 2. tính tiền
+            var ketqua = tinhTien(sotien, phantram);
+            // 3. in kết quả vào vùng div có id #ketqua
+            document.getElementById('ketqua').innerHTML = ketqua;
+        });
+    </script>
+</body>
+</html>

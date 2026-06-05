@@ -22,9 +22,10 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-      "test:unit": "vitest run tests/unit",
-      "test:e2e": "playwright test --ui"
-    },
+    "test:unit": "vitest run tests/unit/userApiStore.unit.test.js",
+    "test:business": "vitest run tests/business/loadUser.business.test.js",
+    "test:e2e": "playwright test --ui"
+  },
     "devDependencies": {
       "@playwright/test": "^1.60.0",
       "@vitest/coverage-v8": "^4.1.7",
