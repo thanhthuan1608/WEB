@@ -1,0 +1,35 @@
+{
+  "WEB": [
+    {
+      "id": "2",
+      "title": "Viết test bằng vitest",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "title": "chạy test e2e",
+      "completed": false
+    },
+    {
+      "title": "11111",
+      "completed": false,
+      "id": "n8dCw0eXmeY"
+    },
+    {
+      "title": "html",
+      "completed": false,
+      "id": "P6_qBGktbFE"
+    },
+    {
+      "title": "1213",
+      "completed": false,
+      "id": "pv05mMUTjI8"
+    },
+    {
+      "title": "423",
+      "completed": false,
+      "id": "y1bljOkNf-Q"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

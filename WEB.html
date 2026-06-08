@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+
+    <style>
+        .section-them-cong-viec {
+            border: 1px solid red;
+            padding: 10px;
+        }
+
+        .section-danh-sach-cong-viec {
+            border: 1px solid blue;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        #todo-msg {
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Danh sách việc cần làm</h1>
+
+    <section class="section-them-cong-viec">
+        <h2>Thêm công việc</h2>
+
+        <form id="todo-form">
+            <label>Tên công việc</label>
+            <input type="text" id="todo-title-input">
+
+            <button type="submit">
+                Thêm công việc
+            </button>
+        </form>
+
+        <div id="todo-msg"></div>
+    </section>
+
+    <section class="section-danh-sach-cong-viec">
+        <h2>Danh sách công việc</h2>
+
+        <ul id="todo-list">
+            <li>Đang tải dữ liệu...</li>
+        </ul>
+    </section>
+
+<script>
+
+// ==========================
+// THÊM CÔNG VIỆC
+// ==========================
+
+const todoForm = document.getElementById("todo-form");
+
+todoForm.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const title = document
+        .getElementById("todo-title-input")
+        .value
+        .trim();
+
+    if (title === "") {
+        document.getElementById("todo-msg").innerHTML =
+            "<b>Vui lòng nhập tên công việc!</b>";
+        return;
+    }
+
+    const payload = {
+        title: title,
+        completed: false
+    };
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:3000/WEB",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            }
+        );
+
+        if (!response.ok) {
+            document.getElementById("todo-msg").innerHTML =
+                "<b>Không lưu được dữ liệu!</b>";
+            return;
+        }
+
+        const savedTodo = await response.json();
+
+        document.getElementById("todo-msg").innerHTML =
+            `<b>Đã thêm công việc ${savedTodo.id} thành công</b>`;
+
+        document.getElementById("todo-title-input").value = "";
+
+        loadTodos();
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("todo-msg").innerHTML =
+            "<b>Lỗi kết nối API!</b>";
+    }
+});
+
+
+// ==========================
+// LOAD DANH SÁCH
+// ==========================
+
+async function loadTodos() {
+
+    try {
+
+        const response =
+            await fetch("http://localhost:3000/WEB");
+
+        if (!response.ok) {
+
+            document.getElementById("todo-list").innerHTML =
+                "<li>Không load được dữ liệu...</li>";
+
+            return;
+        }
+
+        const data = await response.json();
+
+        let html = "";
+
+        data.forEach(job => {
+
+            html += `
+                <li>
+
+                    <input
+                        type="checkbox"
+                        id="chk${job.id}"
+                        ${job.completed ? "checked" : ""}
+                    >
+
+                    <span>${job.title}</span>
+
+                    <button
+                        type="button"
+                        id="edit-button${job.id}">
+                        📝 Sửa
+                    </button>
+
+                    <button
+                        type="button"
+                        id="delete-button${job.id}">
+                        ❌ Xóa
+                    </button>
+
+                </li>
+            `;
+        });
+
+        document.getElementById("todo-list").innerHTML = html;
+
+        // ==========================
+        // ĐĂNG KÝ SỰ KIỆN XÓA
+        // ==========================
+
+        data.forEach(job => {
+
+            const deleteButton =
+                document.getElementById(
+                    `delete-button${job.id}`
+                );
+
+            deleteButton.addEventListener(
+                "click",
+                async () => {
+
+                    const confirmed = confirm(
+                        `Bạn có chắc muốn xóa "${job.title}" không?`
+                    );
+
+                    if (!confirmed) {
+                        return;
+                    }
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `http://localhost:3000/WEB/${job.id}`,
+                                {
+                                    method: "DELETE"
+                                }
+                            );
+
+                        if (!response.ok) {
+
+                            document.getElementById("todo-msg").innerHTML =
+                                "<b>Có lỗi xảy ra, không xóa được!</b>";
+
+                            return;
+                        }
+
+                        document.getElementById("todo-msg").innerHTML =
+                            `<b>Đã xóa công việc ${job.id} thành công</b>`;
+
+                        loadTodos();
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        document.getElementById("todo-msg").innerHTML =
+                            "<b>Lỗi kết nối API!</b>";
+                    }
+                }
+            );
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("todo-list").innerHTML =
+            "<li>Không load được dữ liệu!</li>";
+    }
+}
+
+// Chạy lần đầu
+loadTodos();
+
+</script>
+
+</body>
+</html>
